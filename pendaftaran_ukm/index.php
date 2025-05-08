@@ -20,7 +20,7 @@
 
         <?php
         include 'koneksi.php';
-        $perintah = "SELECT * FROM tabel_pendaftaran";
+        $perintah = "SELECT * FROM tabel_pendaftaran ORDER BY Created_At DESC";
         $eksekusi = mysqli_query($conn,$perintah);
 
         if($eksekusi){
@@ -35,15 +35,16 @@
                 <td><?php echo $ambildata["Created_At"]; ?></td>
                 <td>
                     <a href="ubah.php">Ubah</a>
-                    <a href="proses-hapus.php">Hapus</a>
+                    <a href="proses-hapus.php?kirim_npm=<?php echo $ambildata ["NPM"]; ?>">Hapus</a>
                 </td>
                </tr>
                <?php 
                $i++;
             }
+            $eksekusi->free_result();
         }
+        $conn->close();
         ?>
-       
     </table>
 </body>
 </html>
